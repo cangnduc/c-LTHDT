@@ -12,6 +12,7 @@ namespace LTHDT_console
             Diem tamgiac = new Diem(a, b, c);
             Console.WriteLine(c.khoangCach(a));
             Console.WriteLine(tamgiac.chuVi());
+            ///awdwadss
         }
 
     }
