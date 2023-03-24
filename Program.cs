@@ -6,12 +6,18 @@ namespace LTHDT_console
     {
         private static void Main(string[] args)
         {
-            toaDo a = new toaDo(1, 2);
-            toaDo b = new toaDo(2, 3);
-            toaDo c = new toaDo(3, 4);
-            Diem tamgiac = new Diem(a, b, c);
-            Console.WriteLine(c.khoangCach(a));
-            Console.WriteLine(tamgiac.chuVi());
+            ps a = new ps();
+            ps b = new ps();
+            a.nhapPhanSo("phan so a");
+            b.nhapPhanSo("phan so b");
+            ps kq = a.CongPhanSo(b);
+            kq.xuat();
+            //toaDo a = new toaDo(1, 2);
+            //toaDo b = new toaDo(2, 3);
+            //toaDo c = new toaDo(3, 4);
+            //Diem tamgiac = new Diem(a, b, c);
+            //Console.WriteLine(c.khoangCach(a));
+            //Console.WriteLine(tamgiac.chuVi());
             ///awdwadss
         }
 
@@ -47,8 +53,8 @@ namespace LTHDT_console
         public int y;
         public toaDo()
         {
-            x = 0;
-            y = 0;
+            this.x = 0;
+            this.y = 0;
         }
         public toaDo(int x, int y)
         {
@@ -57,7 +63,7 @@ namespace LTHDT_console
         }
         public double khoangCach(toaDo b)
         {
-            double i = Math.Pow((b.x - y), 2) + Math.Pow((b.y - x), 2);
+            double i = Math.Pow((b.x - this.y), 2) + Math.Pow((b.y - this.x), 2);
             return Math.Sqrt(i);
         }
     }
@@ -84,9 +90,9 @@ namespace LTHDT_console
             };
             return kq;
         }
-        public string xuat()
+        public void xuat()
         {
-            return $"ket qua la: {tuSo}/{mauSo}";
+            Console.WriteLine($"ket qua la: {tuSo}/{mauSo}");
         }
     }
 
