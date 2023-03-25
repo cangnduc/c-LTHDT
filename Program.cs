@@ -23,15 +23,97 @@ namespace LTHDT_console
            // tg.B.NhapToaDo();
            // tg.C.NhapToaDo();
            // Console.WriteLine(tg.ChuVi());
-           Ps a = new Ps();
-            a.TuSo = 5;
-            a.Mauso = 10;
-            Console.WriteLine(a.TuSo);
-            Ps b = a.CongPhanSo(a);
-            b.Xuat();
-
+           //Ps a = new Ps();
+           // a.TuSo = 5;
+           // a.Mauso = 10;
+           // Console.WriteLine(a.TuSo);
+           // Ps b = a.CongPhanSo(a);
+           // b.Xuat();
+           CongTy ct= new CongTy();
+            ct.ThemNV();
+            Console.WriteLine(ct.TongLuong());
         }
 
+    }
+    class NhanVien
+    {
+        private string? MaNV { get; set; }
+        private string? TenNV { get; set; }
+        public virtual void NhapNV(string GhiChu)
+        {
+            Console.WriteLine(GhiChu);
+            Console.WriteLine("Nhap Ma NV: ");
+            this.MaNV = Console.ReadLine();
+            Console.WriteLine("Nhap ten NV: ");
+            this.TenNV = Console.ReadLine();
+            
+        }
+        public virtual double TongLuong()
+        {
+            return 0;
+        }
+
+    }
+    class NVVP : NhanVien
+    {
+        private double HeSoLuong { get; set; }
+        public override void NhapNV(string ghichu)
+        {
+            base.NhapNV(ghichu);
+            Console.WriteLine("Nhap he so luong: ");
+            this.HeSoLuong = double.Parse(Console.ReadLine());
+        }
+        public override double TongLuong()
+        {
+            return this.HeSoLuong * 100;
+        }
+    }
+    class NVSX : NhanVien
+    {
+        private int SoLuongSP { get; set; }
+        public override void NhapNV(string ghichi)
+        {
+            base.NhapNV(ghichi);
+            Console.WriteLine("Nhap So Luong SP: ");
+            this.SoLuongSP = int.Parse(Console.ReadLine());
+        }
+        public override double TongLuong()
+        {
+            return this.SoLuongSP * 2;
+        }
+    }
+    class CongTy
+    {
+        //private string TenCty { get; set; }
+        private List<NhanVien> NhanVien { get; set; } = new List<NhanVien>();
+       
+        public void ThemNV()
+        {
+            Console.WriteLine("So Luong Nhan Vien VP: ");
+            int n = int.Parse(Console.ReadLine());
+            for (int i = 0; i < n; i++)
+            {
+                NhanVien s = new NhanVien();
+                Console.WriteLine("Nhap Loai Nhan Vien 1:NVVP, 2:NVSX");
+                int loai = int.Parse(Console.ReadLine());
+                if (loai == 1) { s = new NVVP(); }
+                else if (loai == 2) { s = new NVSX(); };
+                s.NhapNV($"Nhap Nhan Vien thu: {i + 1}");
+                this.NhanVien.Add(s);
+            }
+            
+            
+        }
+        public double TongLuong()
+        {
+            double t = 0;
+            foreach(var nv in this.NhanVien)
+            {
+                t+= nv.TongLuong();
+            }
+         
+            return t;
+        }
     }
     public class TamGiac
     {
