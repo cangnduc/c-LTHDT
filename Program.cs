@@ -6,73 +6,100 @@ namespace LTHDT_console
     {
         private static void Main(string[] args)
         {
-            ps a = new ps();
-            ps b = new ps();
-            a.nhapPhanSo("phan so a");
-            b.nhapPhanSo("phan so b");
-            ps kq = a.CongPhanSo(b);
-            kq.xuat();
+            //ps a = new ps();
+            //ps b = new ps();
+            //a.nhapPhanSo("phan so a");
+            //b.nhapPhanSo("phan so b");
+            //ps kq = a.CongPhanSo(b);
+            //kq.xuat();
             //toaDo a = new toaDo(1, 2);
             //toaDo b = new toaDo(2, 3);
             //toaDo c = new toaDo(3, 4);
             //Diem tamgiac = new Diem(a, b, c);
             //Console.WriteLine(c.khoangCach(a));
             //Console.WriteLine(tamgiac.chuVi());
-            ///awdwadss
+           //TamGiac tg = new TamGiac();
+           // tg.A.NhapToaDo();
+           // tg.B.NhapToaDo();
+           // tg.C.NhapToaDo();
+           // Console.WriteLine(tg.ChuVi());
+           Ps a = new Ps();
+            a.TuSo = 5;
+            a.Mauso = 10;
+            Console.WriteLine(a.TuSo);
+            Ps b = a.CongPhanSo(a);
+            b.Xuat();
+
         }
 
     }
-    public class Diem
+    public class TamGiac
     {
-        public toaDo A;
-        public toaDo B;
-        public toaDo C;
-        public Diem()
+        public ToaDo A;
+        public ToaDo B;
+        public ToaDo C;
+        public TamGiac()
         {
-            A = new toaDo(1, 0);
-            B = new toaDo(0, 1);
-            C = new toaDo(0, 0);
+            A = new ToaDo(1, 0);
+            B = new ToaDo(0, 1);
+            C = new ToaDo(0, 0);
         }
-        public Diem(toaDo a, toaDo b, toaDo c)
+        public TamGiac(ToaDo a, ToaDo b, ToaDo c)
         {
             A = a;
             B = b;
             C = c;
         }
-        public double chuVi()
+        public double ChuVi()
         {
-            double a = A.khoangCach(B);
-            double b = B.khoangCach(C);
-            double c = C.khoangCach(A);
+            double a = A.KhoangCach(B);
+            double b = B.KhoangCach(C);
+            double c = C.KhoangCach(A);
             return a + b + c;
         }
     }
-    public class toaDo
+    public class ToaDo
     {
         public int x;
         public int y;
-        public toaDo()
+        public ToaDo()
         {
             this.x = 0;
             this.y = 0;
         }
-        public toaDo(int x, int y)
+        public ToaDo(int x, int y)
         {
             this.x = x;
             this.y = y;
         }
-        public double khoangCach(toaDo b)
+        public void NhapToaDo()
+        {
+            Console.WriteLine("Nhap diem x: ");
+            this.x = int.Parse(Console.ReadLine());
+            Console.WriteLine("Nhap diem y: ");
+            this.y = int.Parse(Console.ReadLine());
+        }
+        public double KhoangCach(ToaDo b)
         {
             double i = Math.Pow((b.x - this.y), 2) + Math.Pow((b.y - this.x), 2);
             return Math.Sqrt(i);
         }
     }
 
-    public class ps
+    public class Ps
     {
-        public int tuSo;
-        public int mauSo;
-        public void nhapPhanSo(string ghichu)
+        private int tuSo;
+        private int mauSo;
+        public int Mauso { 
+            get { return this.mauSo; }
+            set { this.mauSo = value; }
+        }
+        public int TuSo
+        {
+            get { return this.tuSo; }
+            set { this.tuSo = value; }
+        }
+        public void NhapPhanSo(string ghichu)
         {
             Console.WriteLine(ghichu);
             Console.WriteLine("Nhap tu so:");
@@ -81,16 +108,16 @@ namespace LTHDT_console
             Console.WriteLine("Nhap mau so:");
             mauSo = int.Parse(Console.ReadLine());
         }
-        public ps CongPhanSo(ps b)
+        public Ps CongPhanSo(Ps b)
         {
-            ps kq = new ps
+            Ps kq = new Ps
             {
                 tuSo = tuSo * b.mauSo + mauSo * b.tuSo,
                 mauSo = mauSo * b.mauSo
             };
             return kq;
         }
-        public void xuat()
+        public void Xuat()
         {
             Console.WriteLine($"ket qua la: {tuSo}/{mauSo}");
         }
