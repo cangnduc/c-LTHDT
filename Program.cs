@@ -18,21 +18,23 @@ namespace LTHDT_console
             //Diem tamgiac = new Diem(a, b, c);
             //Console.WriteLine(c.khoangCach(a));
             //Console.WriteLine(tamgiac.chuVi());
-           //TamGiac tg = new TamGiac();
-           // tg.A.NhapToaDo();
-           // tg.B.NhapToaDo();
-           // tg.C.NhapToaDo();
-           // Console.WriteLine(tg.ChuVi());
-           //Ps a = new Ps();
-           // a.TuSo = 5;
-           // a.Mauso = 10;
-           // Console.WriteLine(a.TuSo);
-           // Ps b = a.CongPhanSo(a);
-           // b.Xuat();
-           CongTy ct= new CongTy();
-            ct.ThemNV();
-            Console.WriteLine(ct.TongLuong());
-            //cang add
+            //TamGiac tg = new TamGiac();
+            // tg.A.NhapToaDo();
+            // tg.B.NhapToaDo();
+            // tg.C.NhapToaDo();
+            // Console.WriteLine(tg.ChuVi());
+            //Ps a = new Ps();
+            // a.TuSo = 5;
+            // a.Mauso = 10;
+            // Console.WriteLine(a.TuSo);
+            // Ps b = a.CongPhanSo(a);
+            // b.Xuat();
+            //CongTy ct = new CongTy();
+            //ct.ThemNV();
+            //Console.WriteLine(ct.TongLuong());
+            MatPhang oxy = new MatPhang();
+            oxy.ThemHinh();
+            Console.WriteLine(oxy.TinhTongChuVi());
         }
 
     }
@@ -47,7 +49,7 @@ namespace LTHDT_console
             this.MaNV = Console.ReadLine();
             Console.WriteLine("Nhap ten NV: ");
             this.TenNV = Console.ReadLine();
-            
+
         }
         public virtual double TongLuong()
         {
@@ -62,7 +64,7 @@ namespace LTHDT_console
         {
             base.NhapNV(ghichu);
             Console.WriteLine("Nhap he so luong: ");
-            this.HeSoLuong = double.Parse(Console.ReadLine());
+            this.HeSoLuong = double.Parse(Console.ReadLine() ?? string.Empty);
         }
         public override double TongLuong()
         {
@@ -76,7 +78,7 @@ namespace LTHDT_console
         {
             base.NhapNV(ghichi);
             Console.WriteLine("Nhap So Luong SP: ");
-            this.SoLuongSP = int.Parse(Console.ReadLine());
+            this.SoLuongSP = int.Parse(Console.ReadLine() ?? string.Empty);
         }
         public override double TongLuong()
         {
@@ -87,32 +89,134 @@ namespace LTHDT_console
     {
         //private string TenCty { get; set; }
         private List<NhanVien> NhanVien { get; set; } = new List<NhanVien>();
-       
+
         public void ThemNV()
         {
             Console.WriteLine("So Luong Nhan Vien VP: ");
-            int n = int.Parse(Console.ReadLine());
+            int n = int.Parse(Console.ReadLine() ?? string.Empty);
             for (int i = 0; i < n; i++)
             {
                 NhanVien s = new NhanVien();
                 Console.WriteLine("Nhap Loai Nhan Vien 1:NVVP, 2:NVSX");
-                int loai = int.Parse(Console.ReadLine());
+
+                int loai = int.Parse(Console.ReadLine() ?? string.Empty);
                 if (loai == 1) { s = new NVVP(); }
-                else if (loai == 2) { s = new NVSX(); };
+                else if (loai == 2) { s = new NVSX(); }
+                else { Console.WriteLine("only 1 vs 2"); }
                 s.NhapNV($"Nhap Nhan Vien thu: {i + 1}");
                 this.NhanVien.Add(s);
             }
-            
-            
+
+
         }
         public double TongLuong()
         {
             double t = 0;
-            foreach(var nv in this.NhanVien)
+            foreach (var nv in this.NhanVien)
             {
-                t+= nv.TongLuong();
+                t += nv.TongLuong();
             }
-         
+
+            return t;
+        }
+    }
+    class Hinh
+    {
+        private string mausac { get; set; } = string.Empty;
+        public virtual void Nhap(string ghichu)
+        {
+            Console.WriteLine("Mau sac: ");
+            this.mausac = Console.ReadLine() ?? string.Empty;
+        }
+        public virtual double TinhChuVi()
+        {
+            return 0;
+        }
+    }
+    class HinhTron : Hinh
+    {
+        private ToaDo I = new ToaDo();
+        private double R = 0;
+        public override void Nhap(string ghichu)
+        {
+            base.Nhap(ghichu);
+            this.I.NhapToaDo();
+            Console.WriteLine("Nhap ban kinh R: ");
+            this.R = double.Parse(Console.ReadLine() ?? string.Empty);
+        }
+        public override double TinhChuVi()
+        {
+            return this.R * Math.PI * 2;
+        }
+    }
+    class HinhChuNhat : Hinh
+    {
+        private double ChieuDai { get; set; }
+        private double ChieuRong { get; set; }
+        public HinhChuNhat(double chieuDai, double chieuRong)
+        {
+            ChieuDai = chieuDai;
+            ChieuRong = chieuRong;
+        }
+        public HinhChuNhat()
+        {
+            this.ChieuDai = 0;
+            this.ChieuRong = 0;
+        }
+        public override void Nhap(string ghichu)
+        {
+            base.Nhap(ghichu);
+            Console.WriteLine("Chieu dai: ");
+            this.ChieuDai = double.Parse(Console.ReadLine() ?? string.Empty);
+            Console.WriteLine("Chieu rong : ");
+            this.ChieuRong = double.Parse(Console.ReadLine() ?? string.Empty);
+        }
+        public override double TinhChuVi()
+        {
+            return (this.ChieuDai + this.ChieuRong) * 2;
+        }
+    }
+    class MatPhang
+    {
+        public List<Hinh> DanhSachHinh { get; set; }
+        public MatPhang()
+        {
+            this.DanhSachHinh = new List<Hinh>();
+        }
+        public void ThemHinh()
+        {
+            Console.WriteLine("Nhap so luong hinh: ");
+            string s = Console.ReadLine()?? string.Empty;
+            int slhinh = 0;
+            if (s==string.Empty)
+            {
+                slhinh = 0;
+            }
+            else
+            {
+                slhinh = int.Parse(s);
+            }
+            for(int i =0; i< slhinh;i++ )
+            {
+                Console.WriteLine("Nhap Loai Hinh, 1: Hinh Tron, 2:Hinh Chu Nhat");
+                Hinh h = new Hinh();
+                int Loai = int.Parse(Console.ReadLine() ?? string.Empty);
+                if (Loai == 1)
+                    h = new HinhTron();
+                else
+                    h = new HinhChuNhat();
+                h.Nhap("Nhap Thong So Cua Hinh: ");
+                this.DanhSachHinh.Add(h);
+            }
+            
+        }
+        public double TinhTongChuVi()
+        {
+            double t = 0;
+            foreach(var hinh in this.DanhSachHinh)
+            {
+                t += hinh.TinhChuVi();
+            }
             return t;
         }
     }
@@ -158,9 +262,9 @@ namespace LTHDT_console
         public void NhapToaDo()
         {
             Console.WriteLine("Nhap diem x: ");
-            this.x = int.Parse(Console.ReadLine());
+            this.x = int.Parse(Console.ReadLine() ?? string.Empty);
             Console.WriteLine("Nhap diem y: ");
-            this.y = int.Parse(Console.ReadLine());
+            this.y = int.Parse(Console.ReadLine() ?? string.Empty);
         }
         public double KhoangCach(ToaDo b)
         {
@@ -186,10 +290,10 @@ namespace LTHDT_console
         {
             Console.WriteLine(ghichu);
             Console.WriteLine("Nhap tu so:");
-            tuSo = int.Parse(Console.ReadLine());
+            tuSo = int.Parse(Console.ReadLine() ?? string.Empty);
             Console.WriteLine(ghichu);
             Console.WriteLine("Nhap mau so:");
-            mauSo = int.Parse(Console.ReadLine());
+            mauSo = int.Parse(Console.ReadLine() ?? string.Empty);
         }
         public Ps CongPhanSo(Ps b)
         {
