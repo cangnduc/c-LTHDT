@@ -32,6 +32,7 @@ namespace LTHDT_console
            CongTy ct= new CongTy();
             ct.ThemNV();
             Console.WriteLine(ct.TongLuong());
+            //cang add
         }
 
     }
