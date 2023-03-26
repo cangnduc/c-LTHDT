@@ -187,7 +187,7 @@ namespace LTHDT_console
         {
             Console.WriteLine("Nhap so luong hinh: ");
             string s = Console.ReadLine()?? string.Empty;
-            int slhinh = 0;
+            int slhinh;
             if (s==string.Empty)
             {
                 slhinh = 0;
@@ -199,7 +199,7 @@ namespace LTHDT_console
             for(int i =0; i< slhinh;i++ )
             {
                 Console.WriteLine("Nhap Loai Hinh, 1: Hinh Tron, 2:Hinh Chu Nhat");
-                Hinh h = new Hinh();
+                Hinh h;
                 int Loai = int.Parse(Console.ReadLine() ?? string.Empty);
                 if (Loai == 1)
                     h = new HinhTron();
