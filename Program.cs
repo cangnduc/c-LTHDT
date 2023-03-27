@@ -32,9 +32,14 @@ namespace LTHDT_console
             //CongTy ct = new CongTy();
             //ct.ThemNV();
             //Console.WriteLine(ct.TongLuong());
-            MatPhang oxy = new MatPhang();
-            oxy.ThemHinh();
-            Console.WriteLine(oxy.TinhTongChuVi());
+            //MatPhang oxy = new MatPhang();
+            //oxy.ThemHinh();
+            //Console.WriteLine(oxy.TinhTongChuVi());
+            MangSoNguyen mangA = new MangSoNguyen(new XulySapXep());
+            mangA.SapXepTangDan();
+            mangA.SapXepGiam();
+            mangA.Xuat();
+
         }
 
     }
@@ -118,6 +123,48 @@ namespace LTHDT_console
             }
 
             return t;
+        }
+    }
+    class MangSoNguyen
+    {
+        int[] DanhSach { get; set; }
+        private SapXep SapXeps { get; set; }
+        public MangSoNguyen(XulySapXep sapxep)
+        {
+            this.DanhSach = new int[] { 1, 3, 5, 2, 6 };
+            this.SapXeps = sapxep;
+        }
+        public void SapXepTangDan()
+        {
+            this.SapXeps.SapXepTang(this.DanhSach);
+        }
+        public void SapXepGiam()
+        {
+            this.SapXeps.SapXepGiam(this.DanhSach);
+        }
+        public void Xuat()
+        {
+            foreach(var i in this.DanhSach)
+            {
+                Console.Write($"{i} ");
+            }
+        }
+
+    }
+    interface SapXep
+    {
+        public void SapXepTang(int[] danhsach);
+        public void SapXepGiam(int[] danhsach);
+    }
+    class XulySapXep : SapXep
+    {
+        public void SapXepTang(int[] danhsach)
+        {
+            Array.Sort(danhsach);
+        }
+        public void SapXepGiam(int[] danhsach)
+        {
+            Array.Reverse(danhsach);
         }
     }
     class Hinh

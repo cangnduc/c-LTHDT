@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\HCMUS\\c-LTHDT\\LTHDT_console.csproj",
+      "projectUniqueName": "D:\\LTHDT\\LTHDT_console.csproj",
       "projectName": "LTHDT_console",
-      "projectPath": "D:\\HCMUS\\c-LTHDT\\LTHDT_console.csproj",
+      "projectPath": "D:\\LTHDT\\LTHDT_console.csproj",
       "packagesPath": "C:\\Users\\cang_\\.nuget\\packages\\",
-      "outputPath": "D:\\HCMUS\\c-LTHDT\\obj\\",
+      "outputPath": "D:\\LTHDT\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\cang_\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -51,8 +51,7 @@
           "net47",
           "net471",
           "net472",
-          "net48",
-          "net481"
+          "net48"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -61,7 +60,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }
